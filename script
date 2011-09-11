@@ -1,0 +1,57 @@
+#!/usr/bin/env Rscript
+# vim: ft=r
+
+args <- commandArgs(TRUE)
+cmd <- args[1]
+
+BUDGET <- 200
+ROSTER <- 29
+POSITIONS <- c('QB', 'WR', 'RB', 'TE', 'K', 'DL', 'LB', 'DB')
+
+# player \t position \t price \t team
+draft <- read.delim('draft', colClasses=c('factor', 'character', 'integer', 'factor'), comment.char='#')
+
+draftL <- split(draft, draft$Team)
+
+# filter
+if (length(args) >= 2) {
+    #cat("filtering:", args[2], "\n")
+    draft <- subset(draft, Team == args[2])
+    draft$Team <- factor(draft$Team)
+    draftL <- draftL[args[2]]
+}
+
+#spent <- function() {
+#    spent <<- aggregate(draft$Price, list(draft$Team), sum)[[2]]
+#}
+
+#ndrafted <- function() {
+#    ndrafted <<- aggregate(draft$Player, list(draft$Team), length)[[2]]
+#}
+
+if (cmd == 'money') {
+    # print balance, max bid
+    x <- t(sapply(draftL, function(x) {
+        c(sum(x$Price), nrow(x))
+    }))
+    s <- x[, 1]
+    b <- BUDGET - s
+    n <- x[, 2]
+    o <- ROSTER - n
+    m <- b - o + 1
+    m[o == 0 | b == 0] <- NA
+    cbind(Spent=s, Balance=b, Open=o, Max.Bid=m)
+}
+
+if (cmd == 'roster') {
+    # print roster
+    if (length(args) < 2) stop('this command requires a team argument')
+    draftLs <- draftL[[args[[2]]]][,c("Position", "Player", "Price")]
+    structure(do.call(rbind, split(draftLs, draftLs$Position)[POSITIONS]), row.names=1:nrow(draftLs))
+}
+
+if (cmd == 'breakdown') {
+    # print roster breakdown
+    t <- table(draft$Team, draft$Position)[, POSITIONS, drop=FALSE]
+    cbind(t, Total=rowSums(t))
+}
