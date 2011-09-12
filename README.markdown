@@ -2,8 +2,8 @@
 
 A script to help manage your offline fantasy sports drafts.
 
-Currently implemented in R, this script will read a tab-delimited text file of
-draft picks and print some information including remaining auction budget,
+Currently implemented in R, this script reads a tab-delimited text file of
+draft picks and prints some information including remaining auction budget,
 maximum bid, and roster breakdown.
 
 ## Input File
