@@ -30,6 +30,16 @@ if (length(args) >= 2) {
 #    ndrafted <<- aggregate(draft$Player, list(draft$Team), length)[[2]]
 #}
 
+if (is.na(cmd)) {
+    # print usage
+    cat('Commands
+    money [team]        Display the finances.
+    roster team         Display a team\'s roster.
+    breakdown [team]    Display the roster breakdowns.
+')
+    q()
+}
+
 if (cmd == 'money') {
     # print balance, max bid
     x <- t(sapply(draftL, function(x) {
