@@ -8,17 +8,17 @@ maximum bid, and roster breakdown.
 
 ## Input File
 
-    Position	Player	Price	Team
-    RB	Arian Foster	50	Will
-    RB	Adrian Peterson	48	Cole
-    QB	Aaron Rodgers	45	Eric
-    WR	Andre Johnson	30	Dave
-    TE	Antonio Gates	25	Matt
-    K	Alex Henery	1	John
+The input file should be a tab-delimited text file with columns for Player,
+Position, Price, and Team. Order doesn't matter as long as the column headers
+match. Extra whitespace is stripped.
 
-Positions help with displaying the breakdown.  Player names can be "First
-Last", "Last, First" or any other format you want.  Team names can also be in
-any format you want.
+    Player      	Position	NFL.Team	Price	Team
+    Aaron Rodgers	QB      	GB      	45	Eric
+    Adrian Peterson	RB      	MIN     	48	Cole
+    Alex Henery 	K       	PHI     	 1	John
+    Andre Johnson	WR      	HOU     	30	Dave
+    Antonio Gates	TE      	SD      	25	Matt
+    Arian Foster	RB      	HOU     	50	Will
 
 ## Usage
 

@@ -8,8 +8,8 @@ BUDGET <- 200
 ROSTER <- 29
 POSITIONS <- c('QB', 'WR', 'RB', 'TE', 'K', 'DL', 'LB', 'DB')
 
-# player \t position \t price \t team
-draft <- read.delim('draft', colClasses=c('factor', 'character', 'integer', 'factor'), comment.char='#')
+draft <- read.delim('draft', strip.white=TRUE, comment.char='#')
+
 draft$Position <- factor(draft$Position, levels=POSITIONS)
 
 draftL <- split(draft, draft$Team)
