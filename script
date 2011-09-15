@@ -1,15 +1,10 @@
 #!/usr/bin/env Rscript
 # vim: ft=r
 
+source('functions.R')
+
 args <- commandArgs(TRUE)
 cmd <- args[1]
-
-getVar <- function(var, default) {
-    new <- strsplit(Sys.getenv(var), ':')[[1]]
-    if (length(new) == 0)
-        new <- default
-    new
-}
 
 # settings
 BUDGET <- as.numeric(getVar('BUDGET', 200))
@@ -17,27 +12,12 @@ ROSTER <- as.numeric(getVar('ROSTER', 15))
 POSITIONS <- getVar('POSITIONS', c('QB', 'WR', 'RB', 'TE', 'K', 'DEF'))
 TEAMS <- getVar('TEAMS', NULL)
 
-draft <- read.delim('draft', strip.white=TRUE, comment.char='#')
-
-draft$Position <- factor(draft$Position, levels=POSITIONS)
-
-draftL <- split(draft, draft$Team)
+draft <- read.draft('draft', POSITIONS, TEAMS)
 
 # filter
 if (length(args) >= 2) {
-    #cat("filtering:", args[2], "\n")
-    draft <- subset(draft, Team == args[2])
-    draft$Team <- factor(draft$Team)
-    draftL <- draftL[args[2]]
+    draft <- filter(args[2])
 }
-
-#spent <- function() {
-#    spent <<- aggregate(draft$Price, list(draft$Team), sum)[[2]]
-#}
-
-#ndrafted <- function() {
-#    ndrafted <<- aggregate(draft$Player, list(draft$Team), length)[[2]]
-#}
 
 if (is.na(cmd)) {
     # print usage
@@ -50,28 +30,14 @@ if (is.na(cmd)) {
 }
 
 if (cmd == 'money') {
-    # print balance, max bid
-    x <- t(sapply(draftL, function(x) {
-        c(sum(x$Price), nrow(x))
-    }))
-    s <- x[, 1]
-    b <- BUDGET - s
-    n <- x[, 2]
-    o <- ROSTER - n
-    m <- b - o + 1
-    m[o == 0 | b == 0] <- NA
-    cbind(Spent=s, Balance=b, Open=o, Max.Bid=m)
+    money()
 }
 
 if (cmd == 'roster') {
-    # print roster
     if (length(args) < 2) stop('this command requires a team argument')
-    draftLs <- draftL[[args[[2]]]][,c("Position", "Player", "Price")]
-    structure(do.call(rbind, split(draftLs, draftLs$Position)[POSITIONS]), row.names=1:nrow(draftLs))
+    roster(args[2])
 }
 
 if (cmd == 'breakdown') {
-    # print roster breakdown
-    t <- table(draft$Team, draft$Position)[, POSITIONS, drop=FALSE]
-    cbind(t, Total=rowSums(t))
+    breakdown()
 }
