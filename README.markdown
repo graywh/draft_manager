@@ -63,17 +63,40 @@ require one.
 
 ## Configuration
 
-There are a few setting that can be defined within the script.
+There are a few setting that can be defined by shell environment variables.
 
 ### BUDGET
 
-Your auction draft budget.
+Your auction draft budget. Defaults to 200. A list can be given if the
+budgets need to be customized by team.
+
+    export BUDGET=300
+
+Or
+
+    export BUDGET=210:190:200:200:200:200
 
 ### ROSTER
 
-The maximum size of the team rosters.
+The maximum size of the team rosters. Defaults to 15. A list can be given if
+the roster sizes need to be customized by team.
+
+    export ROSTER=25
+
+Or
+
+    export ROSTER=16:14:15:15:15:15
 
 ### POSITIONS
 
-The set of positions used in the league.  List them in order you want them
+The set of positions used in the league. List them in the order you want them
 displayed in the roster listing and breakdown table.
+
+    export POSITIONS=QB:WR:RB:TE:K:DEF
+
+### TEAMS
+
+The list of team names. List them in the order you want them displayed in the
+money and roster breakdown tables.
+
+    export TEAMS=Will:Cole:Eric:John:Matt:Dave

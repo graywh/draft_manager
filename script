@@ -4,9 +4,18 @@
 args <- commandArgs(TRUE)
 cmd <- args[1]
 
-BUDGET <- 200
-ROSTER <- 29
-POSITIONS <- c('QB', 'WR', 'RB', 'TE', 'K', 'DL', 'LB', 'DB')
+getVar <- function(var, default) {
+    new <- strsplit(Sys.getenv(var), ':')[[1]]
+    if (length(new) == 0)
+        new <- default
+    new
+}
+
+# settings
+BUDGET <- as.numeric(getVar('BUDGET', 200))
+ROSTER <- as.numeric(getVar('ROSTER', 15))
+POSITIONS <- getVar('POSITIONS', c('QB', 'WR', 'RB', 'TE', 'K', 'DEF'))
+TEAMS <- getVar('TEAMS', NULL)
 
 draft <- read.delim('draft', strip.white=TRUE, comment.char='#')
 
