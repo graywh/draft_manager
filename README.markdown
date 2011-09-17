@@ -12,14 +12,14 @@ The input file should be a tab-delimited text file with columns for Player,
 Position, Price, and Team. Order doesn't matter as long as the column headers
 match. Extra whitespace is stripped.
 
-    Player      	Position	NFL.Team	Price	Team
-    Aaron Rodgers	QB      	GB      	45	Eric
-    Adrian Peterson	RB      	MIN     	48	Cole
-    Alex Henery 	K       	PHI     	 1	Will
-    Andre Johnson	WR      	HOU     	30	Dave
-    Antonio Gates	TE      	SD      	25	Matt
-    Arian Foster	RB      	HOU     	50	Will
-    Atlanta     	DEF     	ATL     	 4	John
+    Player          Position NFL.Team Price Team
+    Aaron Rodgers   QB       GB          45 Eric
+    Adrian Peterson RB       MIN         48 Cole
+    Alex Henery     K        PHI          1 Will
+    Andre Johnson   WR       HOU         30 Dave
+    Antonio Gates   TE       SD          25 Matt
+    Arian Foster    RB       HOU         50 Will
+    Atlanta         DEF      ATL          4 John
 
 ## Usage
 
