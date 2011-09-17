@@ -2,9 +2,9 @@
 
 A script to help manage your offline fantasy sports drafts.
 
-Currently implemented in R, this script reads a tab-delimited text file of
-draft picks and prints some information including remaining auction budget,
-maximum bid, and roster breakdown.
+Currently implemented in R, this script reads a text file of draft picks and
+prints some information including remaining auction budget, maximum bid, and
+roster breakdown.
 
 ## Input File
 
@@ -23,7 +23,7 @@ match. Extra whitespace is stripped.
 
 ## Usage
 
-Just specify the command.  Some commands take an optional team name; others
+Just specify the command. Some commands take an optional team name; others
 require one.
 
 ### money
